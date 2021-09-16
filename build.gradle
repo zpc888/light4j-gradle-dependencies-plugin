@@ -1,11 +1,21 @@
 plugins {
+    id 'java-gradle-plugin'
     id 'version-catalog'
     id 'maven-publish'
     id 'com.gradle.plugin-publish' version '0.14.0'
+    id 'java'
 }
 
 group 'com.prot'
-version '1.0-SNAPSHOT'
+version '1.0.0'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    implementation gradleApi()
+}
 
 catalog {
     versionCatalog {
@@ -89,9 +99,10 @@ pluginBundle {
 gradlePlugin {
     plugins {
         light4jGradleDepenciesPlugin {
-            id = 'com.prot'
+            id = 'com.prot.light4jGradle'
             displayName = 'Light4j Gradle Dependencies (like maven bom) Plugin'
             description = 'Define a bundle of light4j libraries and jackson libs'
+            implementationClass = "com.prot.gradle.plugin.Light4jGradlePlugin"
             version = '1.0.0'
         }
     }
