@@ -1,0 +1,98 @@
+plugins {
+    id 'version-catalog'
+    id 'maven-publish'
+    id 'com.gradle.plugin-publish' version '0.14.0'
+}
+
+group 'com.prot'
+version '1.0-SNAPSHOT'
+
+catalog {
+    versionCatalog {
+        version('light4j', '1.6.27')
+        version('jackson', '2.12.1')
+        version('light4jSchemaValidator', '1.0.29')
+
+        alias('l4j-config').to('com.networknt', 'config').versionRef('light4j')
+        alias('l4j-utility').to('com.networknt', 'utility').versionRef('light4j')
+        alias('l4j-decryptor').to('com.networknt', 'decryptor').versionRef('light4j')
+        alias('l4j-security').to('com.networknt', 'security').versionRef('light4j')
+        alias('l4j-client').to('com.networknt', 'client').versionRef('light4j')
+        alias('l4j-audit').to('com.networknt', 'audit').versionRef('light4j')
+        alias('l4j-info').to('com.networknt', 'info').versionRef('light4j')
+        alias('l4j-health').to('com.networknt', 'health').versionRef('light4j')
+        alias('l4j-status').to('com.networknt', 'status').versionRef('light4j')
+        alias('l4j-exception').to('com.networknt', 'exception').versionRef('light4j')
+        alias('l4j-body').to('com.networknt', 'body').versionRef('light4j')
+        alias('l4j-mask').to('com.networknt', 'mask').versionRef('light4j')
+        alias('l4j-data-source').to('com.networknt', 'data-source').versionRef('light4j')
+        alias('l4j-metrics').to('com.networknt', 'metrics').versionRef('light4j')
+        alias('l4j-handler').to('com.networknt', 'handler').versionRef('light4j')
+        alias('l4j-sanitizer').to('com.networknt', 'sanitizer').versionRef('light4j')
+        alias('l4j-traceability').to('com.networknt', 'traceability').versionRef('light4j')
+        alias('l4j-correlation').to('com.networknt', 'correlation').versionRef('light4j')
+        alias('l4j-service').to('com.networknt', 'service').versionRef('light4j')
+        alias('l4j-registry').to('com.networknt', 'registry').versionRef('light4j')
+        alias('l4j-balance').to('com.networknt', 'balance').versionRef('light4j')
+        alias('l4j-cluster').to('com.networknt', 'cluster').versionRef('light4j')
+        alias('l4j-consul').to('com.networknt', 'consul').versionRef('light4j')
+        alias('l4j-server').to('com.networknt', 'server').versionRef('light4j')
+        alias('l4j-openapi-parser').to('com.networknt', 'openapi-parser').versionRef('light4j')
+        alias('l4j-openapi-meta').to('com.networknt', 'openapi-meta').versionRef('light4j')
+        alias('l4j-openapi-security').to('com.networknt', 'openapi-security').versionRef('light4j')
+        alias('l4j-openapi-validator').to('com.networknt', 'openapi-validator').versionRef('light4j')
+        alias('l4j-common').to('com.networknt', 'common').versionRef('light4j')
+        alias('l4j-specification').to('com.networknt', 'specification').versionRef('light4j')
+
+        alias('l4j-codegen-cli').to('com.networknt', 'codegen-cli').versionRef('light4j')
+
+        alias('l4j-json-schema-validator').to('com.networknt', 'json-schema-validator').versionRef('light4jSchemaValidator')
+
+        alias('jackson-datatype-jdk8').to('com.fasterxml.jackson.datatype', 'jackson-datatype-jdk8').versionRef('jackson')
+        alias('jackson-databind').to('com.fasterxml.jackson.core', 'jackson-databind').versionRef('jackson')
+        alias('jackson-core').to('com.fasterxml.jackson.core', 'jackson-core').versionRef('jackson')
+        alias('jackson-annotations').to('com.fasterxml.jackson.core', 'jackson-annotations').versionRef('jackson')
+        alias('jackson-datatype-jsr310').to('com.fasterxml.jackson.datatype', 'jackson-datatype-jsr310').versionRef('jackson')
+        alias('jackson-dataformat-xml').to('com.fasterxml.jackson.dataformat', 'jackson-dataformat-xml').versionRef('jackson')
+
+        bundle("light4j", [
+                "l4j-config", "l4j-utility", "l4j-decryptor", "l4j-security", "l4j-client",
+                "l4j-audit", "l4j-info", "l4j-health", "l4j-status", "l4j-exception",
+                "l4j-body", "l4j-mask", "l4j-data-source", "l4j-metrics", "l4j-handler",
+                "l4j-sanitizer", "l4j-traceability", "l4j-correlation", "l4j-service", "l4j-registry",
+                "l4j-balance", "l4j-cluster", "l4j-consul", "l4j-server", "l4j-openapi-parser",
+                "l4j-openapi-meta", "l4j-openapi-security", "l4j-openapi-validator", "l4j-common", "l4j-specification",
+                "l4j-json-schema-validator"
+        ])
+
+        bundle("jackson", [
+                "jackson-datatype-jdk8", "jackson-databind", "jackson-core", "jackson-annotations", "jackson-datatype-jsr310",
+                "jackson-dataformat-xml"
+        ])
+    }
+}
+
+publishing {
+    publications {
+        maven(MavenPublication) {
+            from components.versionCatalog
+        }
+    }
+}
+
+pluginBundle {
+    website = 'https://github.com/zpc888/light4j-gradle-dependencies-plugin'
+    vcsUrl = 'https://github.com/zpc888/light4j-gradle-dependencies-plugin.git'
+    tags = ['light4j', 'networknt']
+}
+
+gradlePlugin {
+    plugins {
+        light4jGradleDepenciesPlugin {
+            id = 'com.prot'
+            displayName = 'Light4j Gradle Dependencies (like maven bom) Plugin'
+            description = 'Define a bundle of light4j libraries and jackson libs'
+            version = '1.0.0'
+        }
+    }
+}
